@@ -54,6 +54,8 @@ header h1 {
   gap: 1.75rem;
   flex-wrap: wrap;
   justify-content: center;
+  width: 100%;
+  max-width: 1100px;
 }
 
 .panel {
@@ -67,10 +69,17 @@ header h1 {
   max-width: 510px;
 }
 
+/* Third panel spans full row */
+.panel.wide {
+  flex-basis: 100%;
+  max-width: 1060px;
+}
+
 .panel-header {
   display: flex;
   align-items: baseline;
   gap: 0.75rem;
+  flex-wrap: wrap;
 }
 
 .panel-title {
@@ -91,12 +100,21 @@ header h1 {
   font-weight: 500;
   margin-left: auto;
   white-space: nowrap;
+  text-decoration: none;
+  cursor: default;
 }
+
+a.panel-tag {
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+a.panel-tag:hover { opacity: 0.75; }
 
 .mm .panel-title { color: var(--mm); }
 .ns .panel-title { color: var(--ns); }
 .mm .panel-tag { background: rgba(224,108,117,0.1); color: var(--mm); border: 1px solid rgba(224,108,117,0.22); }
-.ns .panel-tag { background: rgba(78,201,176,0.1); color: var(--ns); border: 1px solid rgba(78,201,176,0.22); }
+.ns .panel-tag { background: rgba(78,201,176,0.1);  color: var(--ns); border: 1px solid rgba(78,201,176,0.22); }
+.wide .panel-tag { background: rgba(255,255,255,0.05); color: var(--dim); border: 1px solid var(--border); }
 
 .panel-desc {
   font-size: 0.78rem;
@@ -105,17 +123,13 @@ header h1 {
   padding-left: 0.65rem;
   border-left: 2px solid var(--border);
 }
+.mm .panel-desc   { border-left-color: rgba(224,108,117,0.3); }
+.ns .panel-desc   { border-left-color: rgba(78,201,176,0.3); }
+.wide .panel-desc { border-left-color: rgba(255,255,255,0.1); }
 
-.mm .panel-desc { border-left-color: rgba(224,108,117,0.3); }
-.ns .panel-desc { border-left-color: rgba(78,201,176,0.3); }
+canvas { display: block; border-radius: 5px; max-width: 100%; }
 
-canvas { display: block; border-radius: 5px; }
-
-.grad-section {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
+.grad-section { display: flex; flex-direction: column; gap: 0.3rem; }
 
 .grad-header {
   display: flex;
@@ -148,7 +162,7 @@ canvas { display: block; border-radius: 5px; }
   height: 100%;
   border-radius: 3px;
   width: 0%;
-  transition: width 0.04s linear;
+  transition: width 0.07s ease-out;
 }
 
 .mm .grad-fill { background: linear-gradient(90deg, #5c1e24 0%, var(--mm) 100%); }
@@ -173,7 +187,26 @@ canvas { display: block; border-radius: 5px; }
 
 .readout-val { color: var(--text); }
 
-/* ── Controls ── */
+/* Legend for gradient comparison panel */
+.gc-legend {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.75rem;
+}
+.gc-legend-item { display: flex; align-items: center; gap: 0.4rem; }
+.gc-legend-item::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  border-radius: 1px;
+}
+.gc-legend-item.mm { color: var(--mm); }
+.gc-legend-item.mm::before { background: var(--mm); }
+.gc-legend-item.ns { color: var(--ns); }
+.gc-legend-item.ns::before { background: var(--ns); }
+
+/* Controls */
 .controls {
   display: flex;
   flex-direction: column;
@@ -252,8 +285,8 @@ button:hover { border-color: #525d75; color: var(--text); }
 <header>
   <h1>GAN Generator Loss — Gradient Behavior</h1>
   <p class="header-body">
-    A generator learns by receiving gradient feedback. But the gradient only exists if the loss curve has a slope.<br>
-    Drag the slider to see what happens to that slope depending on which loss you use.
+    The generator learns by receiving gradient feedback. But the gradient only exists if the loss curve has a slope.<br>
+    Drag the slider to the <em>left</em> to see what happens at the worst moment — when the discriminator is most confident the sample is fake.
   </p>
 </header>
 
@@ -267,9 +300,9 @@ button:hover { border-color: #525d75; color: var(--text); }
       <span class="panel-tag">original GAN</span>
     </div>
     <p class="panel-desc">
-      When the discriminator is confident the image is fake — the left side of the chart —
-      the curve is nearly flat. A flat curve means the gradient is close to zero,
-      so the generator receives almost no learning signal and training stalls.
+      The curve is nearly flat when D(G(z)) is near 0 — the discriminator easily spots the fake.
+      A flat curve means a near-zero gradient, so the generator gets almost no learning signal
+      exactly when it needs one most.
     </p>
     <canvas id="cvMM" width="490" height="290"></canvas>
     <div class="grad-section">
@@ -277,9 +310,7 @@ button:hover { border-color: #525d75; color: var(--text); }
         <span class="grad-label">gradient magnitude &nbsp;|∂L/∂x|</span>
         <span class="grad-pct" id="mmPct">—</span>
       </div>
-      <div class="grad-track">
-        <div class="grad-fill" id="barMM"></div>
-      </div>
+      <div class="grad-track"><div class="grad-fill" id="barMM"></div></div>
     </div>
     <div class="readout">
       <div class="readout-item">
@@ -302,12 +333,12 @@ button:hover { border-color: #525d75; color: var(--text); }
     <div class="panel-header">
       <span class="panel-title">Non-Saturating Loss</span>
       <span class="panel-formula">L = −log(D(G(z)))</span>
-      <span class="panel-tag">Goodfellow et al. fix</span>
+      <a class="panel-tag" href="https://arxiv.org/pdf/1406.2661" target="_blank" rel="noopener">Goodfellow et al. 2014 ↗</a>
     </div>
     <p class="panel-desc">
-      A simple sign flip. Now the curve is steepest on the left — exactly where the generator
-      needs help most. The gradient is large when the discriminator is most confident,
-      giving the generator a strong push to improve.
+      A simple sign flip. The curve is now steepest where D(G(z)) is near 0 —
+      the generator gets its strongest gradient signal exactly when the discriminator
+      is most confident. Training no longer stalls.
     </p>
     <canvas id="cvNS" width="490" height="290"></canvas>
     <div class="grad-section">
@@ -315,9 +346,7 @@ button:hover { border-color: #525d75; color: var(--text); }
         <span class="grad-label">gradient magnitude &nbsp;|∂L/∂x|</span>
         <span class="grad-pct" id="nsPct">—</span>
       </div>
-      <div class="grad-track">
-        <div class="grad-fill" id="barNS"></div>
-      </div>
+      <div class="grad-track"><div class="grad-fill" id="barNS"></div></div>
     </div>
     <div class="readout">
       <div class="readout-item">
@@ -335,6 +364,26 @@ button:hover { border-color: #525d75; color: var(--text); }
     </div>
   </div>
 
+  <!-- Gradient comparison — full-width row -->
+  <div class="panel wide">
+    <div class="panel-header">
+      <span class="panel-title" style="color:#e6edf3">Gradient Magnitude Comparison</span>
+      <span class="panel-formula">|∂L/∂x| for both losses on the same axis</span>
+      <span class="panel-tag">the key picture</span>
+    </div>
+    <p class="panel-desc">
+      Both losses produce equal gradient at D(G(z)) = 0.5 (crossover).
+      In the shaded zone — where the discriminator is most confident the sample is fake —
+      non-saturating has far more gradient, giving the generator a real signal to improve.
+      Move the dot left to see the divergence grow.
+    </p>
+    <canvas id="cvGC" width="980" height="195"></canvas>
+    <div class="gc-legend">
+      <span class="gc-legend-item mm">Minimax |∂L/∂x| = 1/(1−x)</span>
+      <span class="gc-legend-item ns">Non-saturating |∂L/∂x| = 1/x</span>
+    </div>
+  </div>
+
 </div>
 
 <div class="controls">
@@ -343,29 +392,40 @@ button:hover { border-color: #525d75; color: var(--text); }
     <input type="range" id="slider" min="2" max="98" step="1" value="50">
     <button id="toggleBtn">Animate</button>
   </div>
-  <span class="hint">← drag to inspect any point &ensp;·&ensp; click Animate to loop</span>
+  <span class="hint">← drag left to see the problem zone &ensp;·&ensp; Animate sweeps from x = 0.02</span>
 </div>
 
 <script>
 // ── Canvas setup ──────────────────────────────────────────────────────────────
 const cvMM = document.getElementById('cvMM');
 const cvNS = document.getElementById('cvNS');
+const cvGC = document.getElementById('cvGC');
 const ctxMM = cvMM.getContext('2d');
 const ctxNS = cvNS.getContext('2d');
+const ctxGC = cvGC.getContext('2d');
 
-// ── Layout ───────────────────────────────────────────────────────────────────
+// ── Layout — main panels ──────────────────────────────────────────────────────
 const W = 490, H = 290;
 const M = { top: 28, right: 18, bottom: 38, left: 50 };
 const PW = W - M.left - M.right;
 const PH = H - M.top  - M.bottom;
 
+// ── Layout — gradient comparison panel ───────────────────────────────────────
+const W3 = 980, H3 = 195;
+const M3 = { top: 22, right: 20, bottom: 38, left: 56 };
+const PW3 = W3 - M3.left - M3.right;
+const PH3 = H3 - M3.top  - M3.bottom;
+const GC_YMAX = 12, GC_YMIN = 0;
+
 // ── Coordinate transforms ─────────────────────────────────────────────────────
-const MM_YMIN = -5,   MM_YMAX = 0.35;
+const MM_YMIN = -5,    MM_YMAX = 0.35;
 const NS_YMIN = -0.35, NS_YMAX = 5;
 
-function cx(x)   { return M.left + x * PW; }
-function cyMM(y) { return M.top + (MM_YMAX - y) / (MM_YMAX - MM_YMIN) * PH; }
-function cyNS(y) { return M.top + (NS_YMAX - y) / (NS_YMAX - NS_YMIN) * PH; }
+function cx(x)    { return M.left  + x * PW; }
+function cx3(x)   { return M3.left + x * PW3; }
+function cyMM(y)  { return M.top  + (MM_YMAX - y) / (MM_YMAX - MM_YMIN) * PH; }
+function cyNS(y)  { return M.top  + (NS_YMAX - y) / (NS_YMAX - NS_YMIN) * PH; }
+function cyGC(y)  { return M3.top + (GC_YMAX - Math.min(y, GC_YMAX + 1)) / (GC_YMAX - GC_YMIN) * PH3; }
 
 // ── Math ──────────────────────────────────────────────────────────────────────
 const lMM = x => Math.log(1 - x);
@@ -377,9 +437,9 @@ const MAX_GRAD = 100; // |∂L/∂x| at x=0.01 for non-sat
 // ── State — starts paused at x=0.5 ───────────────────────────────────────────
 let animating = false;
 let manualX   = 0.5;
-let t         = (0.5 - 0.02) / (0.98 - 0.02); // sync t to x=0.5
+let t         = (0.5 - 0.02) / 0.96;
 let lastTs    = null;
-const DURATION = 4000;
+const DURATION = 5000; // slightly slower to let the aha moment linger
 
 // ── DOM refs ──────────────────────────────────────────────────────────────────
 const sliderEl    = document.getElementById('slider');
@@ -407,10 +467,11 @@ sliderEl.addEventListener('input', () => {
 
 toggleBtn.addEventListener('click', () => {
   if (animating) {
-    manualX   = getX();      // freeze at current position
+    manualX   = getX();
     animating = false;
     toggleBtn.textContent = 'Animate';
   } else {
+    t         = 0;       // always restart from x=0.02 so viewer sees the aha moment first
     manualX   = null;
     lastTs    = null;
     animating = true;
@@ -422,78 +483,67 @@ function getX() {
   return manualX !== null ? manualX : 0.02 + 0.96 * t;
 }
 
-// ── Draw ──────────────────────────────────────────────────────────────────────
-function drawPanel(ctx, toY, lossFn, gradFn, color, yMin, yMax, isLeft) {
+// ── Draw a main loss panel ────────────────────────────────────────────────────
+function drawPanel(ctx, toY, lossFn, gradFn, color, yMin, yMax, isMinmax) {
   ctx.clearRect(0, 0, W, H);
-
-  // Background
   ctx.fillStyle = '#161b27';
   ctx.fillRect(0, 0, W, H);
 
-  const plotClip = new Path2D();
-  plotClip.rect(M.left, M.top, PW, PH);
+  const clip = new Path2D();
+  clip.rect(M.left, M.top, PW, PH);
 
-  // Grid lines
+  // Grid
   ctx.lineWidth = 1;
   for (let gx = 0.2; gx < 1; gx += 0.2) {
     ctx.strokeStyle = 'rgba(255,255,255,0.04)';
-    ctx.beginPath();
-    ctx.moveTo(cx(gx), M.top);
-    ctx.lineTo(cx(gx), M.top + PH);
-    ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx(gx), M.top); ctx.lineTo(cx(gx), M.top + PH); ctx.stroke();
   }
   for (let gy = Math.ceil(yMin); gy <= Math.floor(yMax); gy++) {
     const py = toY(gy);
     if (py < M.top || py > M.top + PH) continue;
     ctx.strokeStyle = gy === 0 ? 'rgba(255,255,255,0.09)' : 'rgba(255,255,255,0.04)';
-    ctx.beginPath();
-    ctx.moveTo(M.left, py);
-    ctx.lineTo(M.left + PW, py);
-    ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(M.left, py); ctx.lineTo(M.left + PW, py); ctx.stroke();
   }
 
-  // Shaded zone x ∈ [0, 0.15]  — "discriminator confident fake"
+  // Shaded zone x < 0.15
   const shadeW = cx(0.15) - cx(0);
   ctx.fillStyle = 'rgba(255,196,80,0.055)';
   ctx.fillRect(cx(0), M.top, shadeW, PH);
 
-  // Dashed boundary
   ctx.save();
   ctx.setLineDash([3, 5]);
-  ctx.strokeStyle = 'rgba(255,196,80,0.28)';
+  ctx.strokeStyle = 'rgba(255,196,80,0.3)';
   ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.moveTo(cx(0.15), M.top);
-  ctx.lineTo(cx(0.15), M.top + PH);
-  ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(cx(0.15), M.top); ctx.lineTo(cx(0.15), M.top + PH); ctx.stroke();
   ctx.setLineDash([]);
   ctx.restore();
 
-  // Label inside shaded zone — readable with background
-  const labelX = cx(0.015);
-  const labelY = M.top + PH - 16;
-  ctx.save();
-  ctx.font = '9.5px -apple-system, sans-serif';
-  const line1 = 'D confident';
-  const line2 = isLeft ? 'gradient ≈ 0 ✗' : 'gradient large ✓';
-  const tw = Math.max(ctx.measureText(line1).width, ctx.measureText(line2).width);
-  ctx.fillStyle = 'rgba(13,17,23,0.72)';
-  ctx.fillRect(labelX - 2, labelY - 25, tw + 6, 32);
-  ctx.fillStyle = 'rgba(255,196,80,0.8)';
-  ctx.textAlign = 'left';
-  ctx.fillText(line1, labelX, labelY - 12);
-  ctx.fillStyle = isLeft ? 'rgba(224,108,117,0.9)' : 'rgba(78,201,176,0.9)';
-  ctx.font = 'bold 9.5px -apple-system, sans-serif';
-  ctx.fillText(line2, labelX, labelY + 1);
-  ctx.restore();
+  // Annotation in shaded zone — large, opaque background
+  {
+    const ax = cx(0.012);
+    const ay = M.top + PH - 14;
+    const line1 = 'Training stalls here';
+    const line2 = isMinmax ? '∇ ≈ 0  ✗' : 'Strong signal  ✓';
+    ctx.save();
+    ctx.font = 'bold 11px -apple-system, sans-serif';
+    const tw = Math.max(ctx.measureText(line1).width, ctx.measureText(line2).width);
+    ctx.fillStyle = 'rgba(13,17,23,0.88)';
+    ctx.fillRect(ax - 3, ay - 29, tw + 8, 36);
+    ctx.fillStyle = 'rgba(255,200,80,0.9)';
+    ctx.textAlign = 'left';
+    ctx.font = '10.5px -apple-system, sans-serif';
+    ctx.fillText(line1, ax, ay - 14);
+    ctx.fillStyle = isMinmax ? 'rgba(230,108,117,1)' : 'rgba(78,210,180,1)';
+    ctx.font = 'bold 11.5px -apple-system, sans-serif';
+    ctx.fillText(line2, ax, ay + 2);
+    ctx.restore();
+  }
 
   // Axes
   ctx.strokeStyle = 'rgba(255,255,255,0.16)';
   ctx.lineWidth = 1.5;
   ctx.beginPath();
-  ctx.moveTo(M.left, M.top);
-  ctx.lineTo(M.left, M.top + PH);
-  ctx.lineTo(M.left + PW, M.top + PH);
+  ctx.moveTo(M.left, M.top); ctx.lineTo(M.left, M.top + PH); ctx.lineTo(M.left + PW, M.top + PH);
   ctx.stroke();
 
   // Tick labels
@@ -503,12 +553,8 @@ function drawPanel(ctx, toY, lossFn, gradFn, color, yMin, yMax, isLeft) {
   for (let gx = 0; gx <= 1.01; gx += 0.2) {
     const px = cx(gx);
     ctx.fillText(gx.toFixed(1), px, M.top + PH + 14);
-    ctx.strokeStyle = 'rgba(255,255,255,0.1)';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(px, M.top + PH);
-    ctx.lineTo(px, M.top + PH + 4);
-    ctx.stroke();
+    ctx.strokeStyle = 'rgba(255,255,255,0.1)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(px, M.top + PH); ctx.lineTo(px, M.top + PH + 4); ctx.stroke();
   }
   ctx.textAlign = 'right';
   for (let gy = Math.ceil(yMin); gy <= Math.floor(yMax); gy++) {
@@ -516,15 +562,10 @@ function drawPanel(ctx, toY, lossFn, gradFn, color, yMin, yMax, isLeft) {
     if (py < M.top - 1 || py > M.top + PH + 1) continue;
     ctx.fillStyle = '#6b7a96';
     ctx.fillText(gy, M.left - 7, py + 3.5);
-    ctx.strokeStyle = 'rgba(255,255,255,0.1)';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(M.left, py);
-    ctx.lineTo(M.left - 4, py);
-    ctx.stroke();
+    ctx.strokeStyle = 'rgba(255,255,255,0.1)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(M.left, py); ctx.lineTo(M.left - 4, py); ctx.stroke();
   }
 
-  // Axis labels
   ctx.fillStyle = '#6b7a96';
   ctx.font = '11px -apple-system, sans-serif';
   ctx.textAlign = 'center';
@@ -537,11 +578,9 @@ function drawPanel(ctx, toY, lossFn, gradFn, color, yMin, yMax, isLeft) {
 
   // Loss curve
   ctx.save();
-  ctx.clip(plotClip);
-  ctx.strokeStyle = color;
-  ctx.lineWidth = 2.2;
-  ctx.shadowColor = color;
-  ctx.shadowBlur = 6;
+  ctx.clip(clip);
+  ctx.strokeStyle = color; ctx.lineWidth = 2.2;
+  ctx.shadowColor = color; ctx.shadowBlur = 6;
   ctx.beginPath();
   for (let i = 0; i <= 500; i++) {
     const xi = 0.01 + 0.98 * i / 500;
@@ -552,59 +591,191 @@ function drawPanel(ctx, toY, lossFn, gradFn, color, yMin, yMax, isLeft) {
   ctx.shadowBlur = 0;
   ctx.restore();
 
-  // Animated point
+  // Current point
   const x  = getX();
   const lv = lossFn(x);
   const gv = gradFn(x);
-  const px = cx(x);
-  const py = toY(lv);
+  const px = cx(x), py = toY(lv);
 
-  // Tangent line ±0.07 in data-x
+  // Tangent ±0.07
   const td = 0.07;
   const tx1 = Math.max(0.01, x - td), tx2 = Math.min(0.99, x + td);
-  const ty1 = lv + gv * (tx1 - x),   ty2 = lv + gv * (tx2 - x);
-
   ctx.save();
-  ctx.clip(plotClip);
-  ctx.strokeStyle = 'rgba(255,255,255,0.48)';
-  ctx.lineWidth = 1.4;
+  ctx.clip(clip);
+  ctx.strokeStyle = 'rgba(255,255,255,0.46)'; ctx.lineWidth = 1.4;
   ctx.setLineDash([3, 3]);
   ctx.beginPath();
-  ctx.moveTo(cx(tx1), toY(ty1));
-  ctx.lineTo(cx(tx2), toY(ty2));
+  ctx.moveTo(cx(tx1), toY(lv + gv * (tx1 - x)));
+  ctx.lineTo(cx(tx2), toY(lv + gv * (tx2 - x)));
   ctx.stroke();
   ctx.setLineDash([]);
-
-  // Vertical drop
-  ctx.strokeStyle = 'rgba(255,255,255,0.07)';
-  ctx.lineWidth = 1;
+  // Drop line
+  ctx.strokeStyle = 'rgba(255,255,255,0.07)'; ctx.lineWidth = 1;
   ctx.setLineDash([2, 4]);
-  ctx.beginPath();
-  ctx.moveTo(px, py);
-  ctx.lineTo(px, M.top + PH);
-  ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px, M.top + PH); ctx.stroke();
   ctx.setLineDash([]);
   ctx.restore();
 
   // Dot
   ctx.save();
-  ctx.shadowColor = color;
-  ctx.shadowBlur = 14;
+  ctx.shadowColor = color; ctx.shadowBlur = 14;
   ctx.fillStyle = '#ffffff';
-  ctx.beginPath();
-  ctx.arc(px, py, 5.5, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.strokeStyle = color;
-  ctx.lineWidth = 2;
-  ctx.stroke();
+  ctx.beginPath(); ctx.arc(px, py, 5.5, 0, Math.PI * 2); ctx.fill();
+  ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.stroke();
   ctx.shadowBlur = 0;
   ctx.restore();
 }
 
-// ── Update DOM ────────────────────────────────────────────────────────────────
+// ── Draw gradient comparison panel ───────────────────────────────────────────
+function drawGradComp() {
+  const ctx = ctxGC;
+  ctx.clearRect(0, 0, W3, H3);
+  ctx.fillStyle = '#161b27';
+  ctx.fillRect(0, 0, W3, H3);
+
+  const clip3 = new Path2D();
+  clip3.rect(M3.left, M3.top, PW3, PH3);
+
+  // Grid
+  ctx.lineWidth = 1;
+  for (let gx = 0.2; gx < 1; gx += 0.2) {
+    ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+    ctx.beginPath(); ctx.moveTo(cx3(gx), M3.top); ctx.lineTo(cx3(gx), M3.top + PH3); ctx.stroke();
+  }
+  for (let gy = 0; gy <= GC_YMAX; gy += 2) {
+    const py = cyGC(gy);
+    if (py < M3.top || py > M3.top + PH3) continue;
+    ctx.strokeStyle = gy === 0 ? 'rgba(255,255,255,0.09)' : 'rgba(255,255,255,0.04)';
+    ctx.beginPath(); ctx.moveTo(M3.left, py); ctx.lineTo(M3.left + PW3, py); ctx.stroke();
+  }
+
+  // Shaded zone x < 0.15
+  ctx.fillStyle = 'rgba(255,196,80,0.055)';
+  ctx.fillRect(cx3(0), M3.top, cx3(0.15) - cx3(0), PH3);
+  ctx.save();
+  ctx.setLineDash([3, 5]);
+  ctx.strokeStyle = 'rgba(255,196,80,0.3)'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(cx3(0.15), M3.top); ctx.lineTo(cx3(0.15), M3.top + PH3); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.restore();
+
+  // "values clipped ↑" note top-left
+  ctx.fillStyle = 'rgba(255,255,255,0.2)';
+  ctx.font = '9px -apple-system, sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('↑ values clipped above 12', M3.left + 2, M3.top + 10);
+
+  // Axes
+  ctx.strokeStyle = 'rgba(255,255,255,0.16)'; ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(M3.left, M3.top); ctx.lineTo(M3.left, M3.top + PH3); ctx.lineTo(M3.left + PW3, M3.top + PH3);
+  ctx.stroke();
+
+  // X ticks
+  ctx.fillStyle = '#6b7a96';
+  ctx.font = '10px "Courier New", monospace';
+  ctx.textAlign = 'center';
+  for (let gx = 0; gx <= 1.01; gx += 0.2) {
+    const px = cx3(gx);
+    ctx.fillText(gx.toFixed(1), px, M3.top + PH3 + 14);
+    ctx.strokeStyle = 'rgba(255,255,255,0.1)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(px, M3.top + PH3); ctx.lineTo(px, M3.top + PH3 + 4); ctx.stroke();
+  }
+  // Y ticks
+  ctx.textAlign = 'right';
+  for (let gy = 0; gy <= GC_YMAX; gy += 2) {
+    const py = cyGC(gy);
+    if (py < M3.top - 1 || py > M3.top + PH3 + 1) continue;
+    ctx.fillStyle = '#6b7a96';
+    ctx.fillText(gy, M3.left - 7, py + 3.5);
+    ctx.strokeStyle = 'rgba(255,255,255,0.1)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(M3.left, py); ctx.lineTo(M3.left - 4, py); ctx.stroke();
+  }
+
+  ctx.fillStyle = '#6b7a96';
+  ctx.font = '11px -apple-system, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('D(G(z))', M3.left + PW3 / 2, H3 - 2);
+  ctx.save();
+  ctx.translate(13, M3.top + PH3 / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText('|∂L/∂x|', 0, 0);
+  ctx.restore();
+
+  // Minimax gradient curve: 1/(1-x)  (increases left→right)
+  ctx.save();
+  ctx.clip(clip3);
+  ctx.strokeStyle = '#e06c75'; ctx.lineWidth = 2;
+  ctx.shadowColor = '#e06c75'; ctx.shadowBlur = 5;
+  ctx.beginPath();
+  for (let i = 0; i <= 600; i++) {
+    const xi = 0.01 + 0.98 * i / 600;
+    const px = cx3(xi), py = cyGC(1 / (1 - xi));
+    i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+  }
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+  ctx.restore();
+
+  // Non-sat gradient curve: 1/x  (decreases left→right)
+  ctx.save();
+  ctx.clip(clip3);
+  ctx.strokeStyle = '#4ec9b0'; ctx.lineWidth = 2;
+  ctx.shadowColor = '#4ec9b0'; ctx.shadowBlur = 5;
+  ctx.beginPath();
+  for (let i = 0; i <= 600; i++) {
+    const xi = 0.01 + 0.98 * i / 600;
+    const px = cx3(xi), py = cyGC(1 / xi);
+    i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+  }
+  ctx.stroke();
+  ctx.shadowBlur = 0;
+  ctx.restore();
+
+  // Crossover annotation at (0.5, 2)
+  {
+    const cpx = cx3(0.5), cpy = cyGC(2);
+    ctx.save();
+    ctx.fillStyle = 'rgba(255,255,255,0.55)';
+    ctx.beginPath(); ctx.arc(cpx, cpy, 3.5, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = 'rgba(255,255,255,0.45)';
+    ctx.font = '10px -apple-system, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('equal at x = 0.5', cpx + 7, cpy + 4);
+    ctx.restore();
+  }
+
+  // Current x vertical line
+  const x = getX();
+  ctx.save();
+  ctx.clip(clip3);
+  ctx.strokeStyle = 'rgba(255,255,255,0.2)'; ctx.lineWidth = 1;
+  ctx.setLineDash([3, 4]);
+  ctx.beginPath(); ctx.moveTo(cx3(x), M3.top); ctx.lineTo(cx3(x), M3.top + PH3); ctx.stroke();
+  ctx.setLineDash([]);
+
+  const mmGrad = Math.abs(gMM(x));
+  const nsGrad = Math.abs(gNS(x));
+
+  // Minimax dot
+  ctx.shadowColor = '#e06c75'; ctx.shadowBlur = 10;
+  ctx.fillStyle = '#ffffff';
+  ctx.beginPath(); ctx.arc(cx3(x), cyGC(mmGrad), 4.5, 0, Math.PI * 2); ctx.fill();
+  ctx.strokeStyle = '#e06c75'; ctx.lineWidth = 1.8; ctx.stroke();
+  ctx.shadowBlur = 0;
+
+  // Non-sat dot
+  ctx.shadowColor = '#4ec9b0'; ctx.shadowBlur = 10;
+  ctx.fillStyle = '#ffffff';
+  ctx.beginPath(); ctx.arc(cx3(x), cyGC(nsGrad), 4.5, 0, Math.PI * 2); ctx.fill();
+  ctx.strokeStyle = '#4ec9b0'; ctx.lineWidth = 1.8; ctx.stroke();
+  ctx.shadowBlur = 0;
+  ctx.restore();
+}
+
+// ── Update DOM readouts + bars ────────────────────────────────────────────────
 function update() {
   const x = getX();
-
   const agMM = Math.abs(gMM(x));
   const agNS = Math.abs(gNS(x));
 
@@ -635,6 +806,7 @@ function frame(ts) {
 
   drawPanel(ctxMM, cyMM, lMM, gMM, '#e06c75', MM_YMIN, MM_YMAX, true);
   drawPanel(ctxNS, cyNS, lNS, gNS, '#4ec9b0', NS_YMIN, NS_YMAX, false);
+  drawGradComp();
   update();
 
   requestAnimationFrame(frame);
