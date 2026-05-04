@@ -26,105 +26,133 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2.5rem 1.5rem 3.5rem;
-  gap: 2rem;
+  padding: 2.5rem 1.5rem 4rem;
+  gap: 0;
 }
 
-header {
+/* ── Header ── */
+.site-header {
   text-align: center;
-  max-width: 760px;
+  max-width: 820px;
+  margin-bottom: 2rem;
 }
 
-header h1 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
+.site-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
   color: #e6edf3;
-  margin-bottom: 0.6rem;
-  line-height: 1.35;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
 }
 
-.header-sub {
-  font-size: 0.9rem;
-  color: #9ca8bc;
-  line-height: 1.7;
+/* ── Tabs ── */
+.tab-bar {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  width: 100%;
+  max-width: 1350px;
+  margin-bottom: 2.5rem;
 }
 
+.tab-btn {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--dim);
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 0.65rem 1.5rem;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  transition: color 0.15s, border-color 0.15s;
+  margin-bottom: -1px;
+}
+
+.tab-btn:hover { color: var(--text); }
+
+.tab-btn.active {
+  color: #e6edf3;
+  border-bottom-color: #e6edf3;
+}
+
+/* ── Tab panes ── */
+.tab-pane { width: 100%; max-width: 1350px; }
+.tab-pane.hidden { display: none; }
+
+/* ── VIZ TAB ── */
 .panels {
   display: flex;
-  gap: 1.75rem;
+  gap: 2rem;
   flex-wrap: wrap;
   justify-content: center;
-  width: 100%;
-  max-width: 1100px;
 }
 
 .panel {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.3rem 1.4rem 1.1rem;
+  border-radius: 12px;
+  padding: 1.5rem 1.5rem 1.2rem;
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
-  max-width: 515px;
+  gap: 1rem;
+  flex: 1 1 580px;
+  max-width: 650px;
 }
 
 .panel-header {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.85rem;
   flex-wrap: wrap;
 }
 
 .panel-title {
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  letter-spacing: 0.01em;
 }
 
 .panel-formula {
   font-family: 'Courier New', monospace;
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   color: #b0bac8;
   font-weight: 500;
 }
 
 .panel-tag {
-  font-size: 0.7rem;
-  padding: 0.15rem 0.55rem;
+  font-size: 0.72rem;
+  padding: 0.18rem 0.6rem;
   border-radius: 20px;
   font-weight: 500;
   margin-left: auto;
   white-space: nowrap;
   text-decoration: none;
   cursor: default;
-}
-
-a.panel-tag {
-  cursor: pointer;
   transition: opacity 0.15s;
 }
-a.panel-tag:hover { opacity: 0.75; }
+
+a.panel-tag { cursor: pointer; }
+a.panel-tag:hover { opacity: 0.72; }
 
 .mm .panel-title { color: var(--mm); }
 .ns .panel-title { color: var(--ns); }
-.mm .panel-tag { background: rgba(224,108,117,0.12); color: var(--mm); border: 1px solid rgba(224,108,117,0.25); }
-.ns .panel-tag { background: rgba(78,201,176,0.12);  color: var(--ns); border: 1px solid rgba(78,201,176,0.25); }
+.mm .panel-tag { background: rgba(224,108,117,0.12); color: var(--mm); border: 1px solid rgba(224,108,117,0.28); }
+.ns .panel-tag { background: rgba(78,201,176,0.12);  color: var(--ns); border: 1px solid rgba(78,201,176,0.28); }
 
 .panel-desc {
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   color: #aab3c2;
-  line-height: 1.7;
-  padding-left: 0.75rem;
+  line-height: 1.75;
+  padding-left: 0.9rem;
   border-left: 2.5px solid var(--border);
 }
+
 .mm .panel-desc { border-left-color: rgba(224,108,117,0.4); }
 .ns .panel-desc { border-left-color: rgba(78,201,176,0.4); }
 
-canvas { display: block; border-radius: 5px; max-width: 100%; }
+canvas { display: block; border-radius: 6px; max-width: 100%; }
 
-.grad-section { display: flex; flex-direction: column; gap: 0.35rem; }
+.grad-section { display: flex; flex-direction: column; gap: 0.4rem; }
 
 .grad-header {
   display: flex;
@@ -133,7 +161,7 @@ canvas { display: block; border-radius: 5px; max-width: 100%; }
 }
 
 .grad-label {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: #6b7a96;
   text-transform: uppercase;
   letter-spacing: 0.07em;
@@ -141,14 +169,14 @@ canvas { display: block; border-radius: 5px; max-width: 100%; }
 
 .grad-pct {
   font-family: 'Courier New', monospace;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: #9ca8bc;
 }
 
 .grad-track {
   background: #1a1f2e;
   border-radius: 3px;
-  height: 9px;
+  height: 10px;
   overflow: hidden;
   border: 1px solid var(--border);
 }
@@ -165,16 +193,16 @@ canvas { display: block; border-radius: 5px; max-width: 100%; }
 
 .readout {
   font-family: 'Courier New', monospace;
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   color: var(--dim);
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
-.readout-item { display: flex; flex-direction: column; gap: 0.1rem; }
+.readout-item { display: flex; flex-direction: column; gap: 0.12rem; }
 
 .readout-label {
-  font-size: 0.63rem;
+  font-size: 0.66rem;
   color: var(--dimmer);
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -182,47 +210,30 @@ canvas { display: block; border-radius: 5px; max-width: 100%; }
 
 .readout-val { color: #c9d1d9; }
 
-/* Takeaway strip below panels */
-.takeaway {
-  background: rgba(78,201,176,0.06);
-  border: 1px solid rgba(78,201,176,0.18);
-  border-radius: 8px;
-  padding: 0.9rem 1.2rem;
-  max-width: 760px;
-  width: 100%;
-  font-size: 0.88rem;
-  color: #aab3c2;
-  line-height: 1.7;
-}
-
-.takeaway strong {
-  color: var(--ns);
-  font-weight: 600;
-}
-
 /* Controls */
 .controls {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.65rem;
   width: 100%;
-  max-width: 740px;
+  margin-top: 1.75rem;
 }
 
 .controls-row {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
+  gap: 1rem;
   width: 100%;
+  max-width: 900px;
 }
 
 .slider-label {
   font-family: 'Courier New', monospace;
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   color: #9ca8bc;
   white-space: nowrap;
-  min-width: 145px;
+  min-width: 150px;
 }
 
 input[type=range] {
@@ -231,7 +242,7 @@ input[type=range] {
   appearance: none;
   background: var(--border);
   border-radius: 4px;
-  height: 5px;
+  height: 6px;
   cursor: pointer;
   outline: none;
 }
@@ -239,8 +250,8 @@ input[type=range] {
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   background: #c9d1d9;
   border-radius: 50%;
   cursor: pointer;
@@ -248,136 +259,351 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 input[type=range]::-webkit-slider-thumb:hover {
-  transform: scale(1.18);
+  transform: scale(1.15);
   background: #e6edf3;
 }
 
-button {
+.anim-btn {
   background: none;
   border: 1px solid var(--border);
   color: #9ca8bc;
-  padding: 0.4rem 1.1rem;
-  border-radius: 6px;
+  padding: 0.45rem 1.3rem;
+  border-radius: 7px;
   cursor: pointer;
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   letter-spacing: 0.02em;
   transition: border-color 0.15s, color 0.15s;
   white-space: nowrap;
 }
 
-button:hover { border-color: #525d75; color: var(--text); }
+.anim-btn:hover { border-color: #525d75; color: var(--text); }
 
 .hint {
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   color: #525d75;
   letter-spacing: 0.02em;
 }
+
+/* ── WHY TAB ── */
+.why-pane {
+  max-width: 820px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.why-lead {
+  font-size: 1.1rem;
+  color: #aab3c2;
+  line-height: 1.8;
+  border-left: 3px solid rgba(78,201,176,0.5);
+  padding-left: 1.1rem;
+}
+
+.why-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.why-section h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #e6edf3;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.why-section h2 .num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--border);
+  color: #9ca8bc;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.why-section p {
+  font-size: 0.95rem;
+  color: #aab3c2;
+  line-height: 1.8;
+}
+
+.callout {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.1rem 1.3rem;
+}
+
+.callout.mm-callout { border-left: 3px solid var(--mm); }
+.callout.ns-callout { border-left: 3px solid var(--ns); }
+
+.callout-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.45rem;
+}
+
+.mm-callout .callout-title { color: var(--mm); }
+.ns-callout .callout-title { color: var(--ns); }
+
+.callout p {
+  font-size: 0.92rem;
+  color: #aab3c2;
+  line-height: 1.75;
+}
+
+.callout code {
+  font-family: 'Courier New', monospace;
+  font-size: 0.88rem;
+  color: #c9d1d9;
+  background: rgba(255,255,255,0.06);
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+}
+
+.side-by-side {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.side-by-side .callout { flex: 1 1 300px; }
+
+.why-summary {
+  background: rgba(78,201,176,0.06);
+  border: 1px solid rgba(78,201,176,0.2);
+  border-radius: 10px;
+  padding: 1.2rem 1.4rem;
+}
+
+.why-summary h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ns);
+  margin-bottom: 0.75rem;
+}
+
+.why-summary p {
+  font-size: 0.95rem;
+  color: #aab3c2;
+  line-height: 1.8;
+}
+
+.why-summary strong { color: #e6edf3; }
 </style>
 </head>
 <body>
 
-<header>
+<div class="site-header">
   <h1>There are two ways to frame the GAN Generator loss,<br>and the non-saturating loss results in better training.</h1>
-  <p class="header-sub">Drag the slider to inspect gradient magnitude at any point.<br>Drag left to see the critical early-training zone where the two losses diverge most.</p>
-</header>
-
-<div class="panels">
-
-  <!-- Minimax -->
-  <div class="panel mm">
-    <div class="panel-header">
-      <span class="panel-title">Minimax Loss</span>
-      <span class="panel-formula">L = log(1 − D(G(z)))</span>
-      <span class="panel-tag">original GAN</span>
-    </div>
-    <p class="panel-desc">
-      When the discriminator is confident the image is fake (left side of the chart),
-      the curve is nearly flat. A flat curve means the gradient is close to zero,
-      so the generator receives almost no learning signal and training stalls.
-    </p>
-    <canvas id="cvMM" width="490" height="290"></canvas>
-    <div class="grad-section">
-      <div class="grad-header">
-        <span class="grad-label">Gradient magnitude &nbsp;|∂L/∂x|</span>
-        <span class="grad-pct" id="mmPct">—</span>
-      </div>
-      <div class="grad-track"><div class="grad-fill" id="barMM"></div></div>
-    </div>
-    <div class="readout">
-      <div class="readout-item">
-        <span class="readout-label">D(G(z))</span>
-        <span class="readout-val" id="mmX">—</span>
-      </div>
-      <div class="readout-item">
-        <span class="readout-label">Loss</span>
-        <span class="readout-val" id="mmL">—</span>
-      </div>
-      <div class="readout-item">
-        <span class="readout-label">|∂L/∂x|</span>
-        <span class="readout-val" id="mmG">—</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Non-saturating -->
-  <div class="panel ns">
-    <div class="panel-header">
-      <span class="panel-title">Non-Saturating Loss</span>
-      <span class="panel-formula">L = −log(D(G(z)))</span>
-      <a class="panel-tag" href="https://arxiv.org/pdf/1406.2661" target="_blank" rel="noopener">Goodfellow et al. 2014 ↗</a>
-    </div>
-    <p class="panel-desc">
-      By flipping the sign, the curve is steepest on the left, which is exactly where
-      the generator needs help most. The gradient is large when the discriminator is most
-      confident, giving the generator a strong push to improve.
-    </p>
-    <canvas id="cvNS" width="490" height="290"></canvas>
-    <div class="grad-section">
-      <div class="grad-header">
-        <span class="grad-label">Gradient magnitude &nbsp;|∂L/∂x|</span>
-        <span class="grad-pct" id="nsPct">—</span>
-      </div>
-      <div class="grad-track"><div class="grad-fill" id="barNS"></div></div>
-    </div>
-    <div class="readout">
-      <div class="readout-item">
-        <span class="readout-label">D(G(z))</span>
-        <span class="readout-val" id="nsX">—</span>
-      </div>
-      <div class="readout-item">
-        <span class="readout-label">Loss</span>
-        <span class="readout-val" id="nsL">—</span>
-      </div>
-      <div class="readout-item">
-        <span class="readout-label">|∂L/∂x|</span>
-        <span class="readout-val" id="nsG">—</span>
-      </div>
-    </div>
-  </div>
-
 </div>
 
-<!-- Speed of training takeaway -->
-<div class="takeaway">
-  <strong>Why this matters for training speed:</strong> In the early stages of GAN training, the
-  discriminator is usually far ahead of the generator — it easily classifies generated samples as
-  fake, keeping D(G(z)) near 0. With minimax loss, the gradient vanishes in exactly this region,
-  so the generator makes little to no progress per step. The non-saturating loss flips this:
-  the same "easy fake" region produces the largest gradient, so the generator learns quickly
-  even when the discriminator is dominant. This single change dramatically stabilizes and
-  accelerates the opening phase of training.
+<!-- Tab bar -->
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="viz">Loss Curves</button>
+  <button class="tab-btn" data-tab="why">Why It Matters for Training Speed</button>
 </div>
 
-<div class="controls">
-  <div class="controls-row">
-    <span class="slider-label">D(G(z)) = <span id="sliderVal">0.50</span></span>
-    <input type="range" id="slider" min="2" max="98" step="1" value="50">
-    <button id="toggleBtn">Animate</button>
+<!-- ── Tab 1: Visualization ── -->
+<div class="tab-pane" id="pane-viz">
+  <div class="panels">
+
+    <div class="panel mm">
+      <div class="panel-header">
+        <span class="panel-title">Minimax Loss</span>
+        <span class="panel-formula">L = log(1 − D(G(z)))</span>
+        <span class="panel-tag">original GAN</span>
+      </div>
+      <p class="panel-desc">
+        When the discriminator is confident the image is fake (left side of the chart),
+        the curve is nearly flat. A flat curve means the gradient is close to zero,
+        so the generator receives almost no learning signal and training stalls.
+      </p>
+      <canvas id="cvMM" width="600" height="370"></canvas>
+      <div class="grad-section">
+        <div class="grad-header">
+          <span class="grad-label">Gradient magnitude &nbsp;|∂L/∂x|</span>
+          <span class="grad-pct" id="mmPct">—</span>
+        </div>
+        <div class="grad-track"><div class="grad-fill" id="barMM"></div></div>
+      </div>
+      <div class="readout">
+        <div class="readout-item">
+          <span class="readout-label">D(G(z))</span>
+          <span class="readout-val" id="mmX">—</span>
+        </div>
+        <div class="readout-item">
+          <span class="readout-label">Loss</span>
+          <span class="readout-val" id="mmL">—</span>
+        </div>
+        <div class="readout-item">
+          <span class="readout-label">|∂L/∂x|</span>
+          <span class="readout-val" id="mmG">—</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel ns">
+      <div class="panel-header">
+        <span class="panel-title">Non-Saturating Loss</span>
+        <span class="panel-formula">L = −log(D(G(z)))</span>
+        <a class="panel-tag" href="https://arxiv.org/pdf/1406.2661" target="_blank" rel="noopener">Goodfellow et al. 2014 ↗</a>
+      </div>
+      <p class="panel-desc">
+        By flipping the sign, the curve is steepest on the left, which is exactly where
+        the generator needs help most. The gradient is large when the discriminator is most
+        confident, giving the generator a strong push to improve.
+      </p>
+      <canvas id="cvNS" width="600" height="370"></canvas>
+      <div class="grad-section">
+        <div class="grad-header">
+          <span class="grad-label">Gradient magnitude &nbsp;|∂L/∂x|</span>
+          <span class="grad-pct" id="nsPct">—</span>
+        </div>
+        <div class="grad-track"><div class="grad-fill" id="barNS"></div></div>
+      </div>
+      <div class="readout">
+        <div class="readout-item">
+          <span class="readout-label">D(G(z))</span>
+          <span class="readout-val" id="nsX">—</span>
+        </div>
+        <div class="readout-item">
+          <span class="readout-label">Loss</span>
+          <span class="readout-val" id="nsL">—</span>
+        </div>
+        <div class="readout-item">
+          <span class="readout-label">|∂L/∂x|</span>
+          <span class="readout-val" id="nsG">—</span>
+        </div>
+      </div>
+    </div>
+
   </div>
-  <span class="hint">← drag left to see the problem zone &ensp;·&ensp; Animate sweeps from x = 0.02</span>
+
+  <div class="controls">
+    <div class="controls-row">
+      <span class="slider-label">D(G(z)) = <span id="sliderVal">0.50</span></span>
+      <input type="range" id="slider" min="2" max="98" step="1" value="50">
+      <button class="anim-btn" id="toggleBtn">Animate</button>
+    </div>
+    <span class="hint">← drag left to see the problem zone &ensp;·&ensp; Animate sweeps from x = 0.02</span>
+  </div>
+</div>
+
+<!-- ── Tab 2: Why it matters ── -->
+<div class="tab-pane hidden" id="pane-why">
+  <div class="why-pane">
+
+    <p class="why-lead">
+      The choice of loss function doesn't just change the math — it determines whether
+      the generator can learn at all during the most critical phase of training.
+      Here's why.
+    </p>
+
+    <div class="why-section">
+      <h2><span class="num">1</span>The discriminator always wins first</h2>
+      <p>
+        In the early stages of GAN training, the discriminator has a structural advantage.
+        It sees both real data and generated noise, and quickly learns to tell them apart.
+        The generator, starting from random weights, produces obvious garbage.
+        During this phase, <strong style="color:#c9d1d9">D(G(z)) ≈ 0 for almost every generated sample</strong> —
+        the discriminator is effectively saying "I'm 99% sure this is fake" every single time.
+      </p>
+      <p>
+        This is the zone on the left side of the chart. It's where training either accelerates
+        or dies, depending entirely on which loss you use.
+      </p>
+    </div>
+
+    <div class="why-section">
+      <h2><span class="num">2</span>What each loss does with that information</h2>
+      <div class="side-by-side">
+        <div class="callout mm-callout">
+          <div class="callout-title">Minimax — the original</div>
+          <p>
+            When D(G(z)) ≈ 0.05, the minimax loss is
+            <code>log(1 − 0.05) = −0.05</code> — nearly zero, nearly flat.
+            The gradient is <code>−1/(1 − 0.05) ≈ −1.05</code>.
+            That sounds like something, but relative to the gradient later in training
+            (where x → 1 and the gradient → −∞), it's negligible.
+            The generator takes a tiny, nearly useless step.
+          </p>
+        </div>
+        <div class="callout ns-callout">
+          <div class="callout-title">Non-saturating — the fix</div>
+          <p>
+            At D(G(z)) ≈ 0.05, the non-saturating loss is
+            <code>−log(0.05) ≈ 3.0</code> — large and steep.
+            The gradient is <code>−1/0.05 = −20</code>.
+            The generator receives a massive signal: "you are very wrong, here's exactly
+            how wrong." It takes a large, meaningful step toward fooling the discriminator.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="why-section">
+      <h2><span class="num">3</span>The gradient bar tells the story directly</h2>
+      <p>
+        Switch back to the Loss Curves tab and drag the slider all the way to the left.
+        Watch both gradient bars simultaneously. Non-saturating fills to nearly 100%.
+        Minimax barely registers. Both are looking at the same situation —
+        a discriminator that's confident the sample is fake — but they produce
+        completely opposite gradient magnitudes.
+      </p>
+      <p>
+        Now drag right toward x = 0.5. The bars converge. By x = 0.8, minimax actually
+        has the larger gradient. But that region is irrelevant in early training —
+        the generator never reaches it until it's already learned to fool the discriminator.
+      </p>
+    </div>
+
+    <div class="why-section">
+      <h2><span class="num">4</span>The practical result</h2>
+      <div class="why-summary">
+        <h3>Non-saturating loss trains faster because it eliminates wasted steps</h3>
+        <p>
+          With minimax loss, <strong>the first N gradient steps of training are nearly useless</strong> —
+          the generator barely updates while the discriminator is dominant.
+          Training appears to do nothing, then suddenly the generator catches up.
+          In practice this leads to instability, mode collapse, and long wall-clock times.
+        </p>
+        <p style="margin-top:0.75rem">
+          The non-saturating reformulation ensures that <strong>every step counts</strong>,
+          even at the start. The generator makes meaningful progress on step 1.
+          This stabilizes the adversarial dynamic, reduces the discriminator's lead,
+          and compresses the opening phase of training significantly.
+          It's the same model, same architecture, same learning rate —
+          just a sign flip in the loss.
+        </p>
+      </div>
+    </div>
+
+  </div>
 </div>
 
 <script>
+// ── Tab switching ─────────────────────────────────────────────────────────────
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.add('hidden'));
+    btn.classList.add('active');
+    document.getElementById('pane-' + btn.dataset.tab).classList.remove('hidden');
+  });
+});
+
 // ── Canvas setup ──────────────────────────────────────────────────────────────
 const cvMM = document.getElementById('cvMM');
 const cvNS = document.getElementById('cvNS');
@@ -385,8 +611,8 @@ const ctxMM = cvMM.getContext('2d');
 const ctxNS = cvNS.getContext('2d');
 
 // ── Layout ───────────────────────────────────────────────────────────────────
-const W = 490, H = 290;
-const M = { top: 28, right: 18, bottom: 38, left: 50 };
+const W = 600, H = 370;
+const M = { top: 32, right: 22, bottom: 46, left: 58 };
 const PW = W - M.left - M.right;
 const PH = H - M.top  - M.bottom;
 
@@ -405,7 +631,7 @@ const lNS = x => -Math.log(x);
 const gNS = x => -1 / x;
 const MAX_GRAD = 100;
 
-// ── State — starts paused at x=0.5 ───────────────────────────────────────────
+// ── State ─────────────────────────────────────────────────────────────────────
 let animating = false;
 let manualX   = 0.5;
 let t         = (0.5 - 0.02) / 0.96;
@@ -429,32 +655,21 @@ const nsGEl       = document.getElementById('nsG');
 
 sliderEl.addEventListener('input', () => {
   manualX = parseInt(sliderEl.value) / 100;
-  if (animating) {
-    animating = false;
-    toggleBtn.textContent = 'Animate';
-  }
+  if (animating) { animating = false; toggleBtn.textContent = 'Animate'; }
   sliderValEl.textContent = manualX.toFixed(2);
 });
 
 toggleBtn.addEventListener('click', () => {
   if (animating) {
-    manualX   = getX();
-    animating = false;
-    toggleBtn.textContent = 'Animate';
+    manualX = getX(); animating = false; toggleBtn.textContent = 'Animate';
   } else {
-    t         = 0;
-    manualX   = null;
-    lastTs    = null;
-    animating = true;
-    toggleBtn.textContent = 'Pause';
+    t = 0; manualX = null; lastTs = null; animating = true; toggleBtn.textContent = 'Pause';
   }
 });
 
-function getX() {
-  return manualX !== null ? manualX : 0.02 + 0.96 * t;
-}
+function getX() { return manualX !== null ? manualX : 0.02 + 0.96 * t; }
 
-// ── Draw a main loss panel ────────────────────────────────────────────────────
+// ── Draw panel ────────────────────────────────────────────────────────────────
 function drawPanel(ctx, toY, lossFn, gradFn, color, yMin, yMax, isMinmax) {
   ctx.clearRect(0, 0, W, H);
   ctx.fillStyle = '#161b27';
@@ -476,10 +691,9 @@ function drawPanel(ctx, toY, lossFn, gradFn, color, yMin, yMax, isMinmax) {
     ctx.beginPath(); ctx.moveTo(M.left, py); ctx.lineTo(M.left + PW, py); ctx.stroke();
   }
 
-  // Shaded zone x < 0.15
+  // Shaded zone
   ctx.fillStyle = 'rgba(255,196,80,0.055)';
   ctx.fillRect(cx(0), M.top, cx(0.15) - cx(0), PH);
-
   ctx.save();
   ctx.setLineDash([3, 5]);
   ctx.strokeStyle = 'rgba(255,196,80,0.3)'; ctx.lineWidth = 1;
@@ -487,24 +701,23 @@ function drawPanel(ctx, toY, lossFn, gradFn, color, yMin, yMax, isMinmax) {
   ctx.setLineDash([]);
   ctx.restore();
 
-  // Annotation in shaded zone
+  // Annotation
   {
-    const ax = cx(0.012);
-    const ay = M.top + PH - 14;
+    const ax = cx(0.012), ay = M.top + PH - 16;
     const line1 = 'Training stalls here';
     const line2 = isMinmax ? '∇ ≈ 0  ✗' : 'Strong signal  ✓';
     ctx.save();
-    ctx.font = 'bold 11px -apple-system, sans-serif';
+    ctx.font = 'bold 12px -apple-system, sans-serif';
     const tw = Math.max(ctx.measureText(line1).width, ctx.measureText(line2).width);
-    ctx.fillStyle = 'rgba(13,17,23,0.9)';
-    ctx.fillRect(ax - 3, ay - 29, tw + 8, 36);
+    ctx.fillStyle = 'rgba(13,17,23,0.92)';
+    ctx.fillRect(ax - 4, ay - 31, tw + 10, 39);
     ctx.fillStyle = 'rgba(255,200,80,0.95)';
     ctx.textAlign = 'left';
-    ctx.font = '10.5px -apple-system, sans-serif';
-    ctx.fillText(line1, ax, ay - 14);
-    ctx.fillStyle = isMinmax ? 'rgba(230,108,117,1)' : 'rgba(78,210,180,1)';
-    ctx.font = 'bold 11.5px -apple-system, sans-serif';
-    ctx.fillText(line2, ax, ay + 2);
+    ctx.font = '11px -apple-system, sans-serif';
+    ctx.fillText(line1, ax, ay - 15);
+    ctx.fillStyle = isMinmax ? 'rgba(230,108,117,1)' : 'rgba(78,215,185,1)';
+    ctx.font = 'bold 12.5px -apple-system, sans-serif';
+    ctx.fillText(line2, ax, ay + 3);
     ctx.restore();
   }
 
@@ -514,30 +727,30 @@ function drawPanel(ctx, toY, lossFn, gradFn, color, yMin, yMax, isMinmax) {
   ctx.moveTo(M.left, M.top); ctx.lineTo(M.left, M.top + PH); ctx.lineTo(M.left + PW, M.top + PH);
   ctx.stroke();
 
-  // Tick labels
-  ctx.fillStyle = '#6b7a96'; ctx.font = '10px "Courier New", monospace';
+  // Ticks
+  ctx.fillStyle = '#6b7a96'; ctx.font = '11px "Courier New", monospace';
   ctx.textAlign = 'center';
   for (let gx = 0; gx <= 1.01; gx += 0.2) {
     const px = cx(gx);
-    ctx.fillText(gx.toFixed(1), px, M.top + PH + 14);
+    ctx.fillText(gx.toFixed(1), px, M.top + PH + 16);
     ctx.strokeStyle = 'rgba(255,255,255,0.1)'; ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.moveTo(px, M.top + PH); ctx.lineTo(px, M.top + PH + 4); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(px, M.top + PH); ctx.lineTo(px, M.top + PH + 5); ctx.stroke();
   }
   ctx.textAlign = 'right';
   for (let gy = Math.ceil(yMin); gy <= Math.floor(yMax); gy++) {
     const py = toY(gy);
     if (py < M.top - 1 || py > M.top + PH + 1) continue;
     ctx.fillStyle = '#6b7a96';
-    ctx.fillText(gy, M.left - 7, py + 3.5);
+    ctx.fillText(gy, M.left - 8, py + 4);
     ctx.strokeStyle = 'rgba(255,255,255,0.1)'; ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.moveTo(M.left, py); ctx.lineTo(M.left - 4, py); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(M.left, py); ctx.lineTo(M.left - 5, py); ctx.stroke();
   }
 
-  ctx.fillStyle = '#6b7a96'; ctx.font = '11px -apple-system, sans-serif';
+  ctx.fillStyle = '#6b7a96'; ctx.font = '12px -apple-system, sans-serif';
   ctx.textAlign = 'center';
-  ctx.fillText('D(G(z))', M.left + PW / 2, H - 2);
+  ctx.fillText('D(G(z))', M.left + PW / 2, H - 3);
   ctx.save();
-  ctx.translate(12, M.top + PH / 2);
+  ctx.translate(14, M.top + PH / 2);
   ctx.rotate(-Math.PI / 2);
   ctx.fillText('Generator loss', 0, 0);
   ctx.restore();
@@ -545,16 +758,15 @@ function drawPanel(ctx, toY, lossFn, gradFn, color, yMin, yMax, isMinmax) {
   // Loss curve
   ctx.save();
   ctx.clip(clip);
-  ctx.strokeStyle = color; ctx.lineWidth = 2.2;
-  ctx.shadowColor = color; ctx.shadowBlur = 6;
+  ctx.strokeStyle = color; ctx.lineWidth = 2.4;
+  ctx.shadowColor = color; ctx.shadowBlur = 7;
   ctx.beginPath();
   for (let i = 0; i <= 500; i++) {
     const xi = 0.01 + 0.98 * i / 500;
     const px = cx(xi), py = toY(lossFn(xi));
     i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
   }
-  ctx.stroke();
-  ctx.shadowBlur = 0;
+  ctx.stroke(); ctx.shadowBlur = 0;
   ctx.restore();
 
   // Current point
@@ -562,31 +774,28 @@ function drawPanel(ctx, toY, lossFn, gradFn, color, yMin, yMax, isMinmax) {
   const lv = lossFn(x);
   const gv = gradFn(x);
   const px = cx(x), py = toY(lv);
-
-  // Tangent ±0.07
   const td = 0.07;
   const tx1 = Math.max(0.01, x - td), tx2 = Math.min(0.99, x + td);
+
   ctx.save();
   ctx.clip(clip);
-  ctx.strokeStyle = 'rgba(255,255,255,0.46)'; ctx.lineWidth = 1.4;
+  ctx.strokeStyle = 'rgba(255,255,255,0.46)'; ctx.lineWidth = 1.5;
   ctx.setLineDash([3, 3]);
   ctx.beginPath();
   ctx.moveTo(cx(tx1), toY(lv + gv * (tx1 - x)));
   ctx.lineTo(cx(tx2), toY(lv + gv * (tx2 - x)));
-  ctx.stroke();
-  ctx.setLineDash([]);
+  ctx.stroke(); ctx.setLineDash([]);
   ctx.strokeStyle = 'rgba(255,255,255,0.07)'; ctx.lineWidth = 1;
   ctx.setLineDash([2, 4]);
   ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px, M.top + PH); ctx.stroke();
   ctx.setLineDash([]);
   ctx.restore();
 
-  // Dot
   ctx.save();
-  ctx.shadowColor = color; ctx.shadowBlur = 14;
+  ctx.shadowColor = color; ctx.shadowBlur = 16;
   ctx.fillStyle = '#ffffff';
-  ctx.beginPath(); ctx.arc(px, py, 5.5, 0, Math.PI * 2); ctx.fill();
-  ctx.strokeStyle = color; ctx.lineWidth = 2; ctx.stroke();
+  ctx.beginPath(); ctx.arc(px, py, 6, 0, Math.PI * 2); ctx.fill();
+  ctx.strokeStyle = color; ctx.lineWidth = 2.2; ctx.stroke();
   ctx.shadowBlur = 0;
   ctx.restore();
 }
@@ -594,25 +803,18 @@ function drawPanel(ctx, toY, lossFn, gradFn, color, yMin, yMax, isMinmax) {
 // ── Update DOM ────────────────────────────────────────────────────────────────
 function update() {
   const x = getX();
-  const agMM = Math.abs(gMM(x));
-  const agNS = Math.abs(gNS(x));
+  const agMM = Math.abs(gMM(x)), agNS = Math.abs(gNS(x));
 
-  mmXEl.textContent = x.toFixed(3);
-  mmLEl.textContent = lMM(x).toFixed(3);
-  mmGEl.textContent = agMM.toFixed(2);
-  nsXEl.textContent = x.toFixed(3);
-  nsLEl.textContent = lNS(x).toFixed(3);
-  nsGEl.textContent = agNS.toFixed(2);
+  mmXEl.textContent = x.toFixed(3); mmLEl.textContent = lMM(x).toFixed(3); mmGEl.textContent = agMM.toFixed(2);
+  nsXEl.textContent = x.toFixed(3); nsLEl.textContent = lNS(x).toFixed(3); nsGEl.textContent = agNS.toFixed(2);
 
   sliderValEl.textContent = x.toFixed(2);
   if (manualX === null) sliderEl.value = Math.round(x * 100);
 
   const pMM = Math.min(100, agMM / MAX_GRAD * 100);
   const pNS = Math.min(100, agNS / MAX_GRAD * 100);
-  barMM.style.width = pMM.toFixed(1) + '%';
-  barNS.style.width = pNS.toFixed(1) + '%';
-  mmPctEl.textContent = pMM.toFixed(0) + '%';
-  nsPctEl.textContent = pNS.toFixed(0) + '%';
+  barMM.style.width = pMM.toFixed(1) + '%'; mmPctEl.textContent = pMM.toFixed(0) + '%';
+  barNS.style.width = pNS.toFixed(1) + '%'; nsPctEl.textContent = pNS.toFixed(0) + '%';
 }
 
 // ── Render loop ───────────────────────────────────────────────────────────────
