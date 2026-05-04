@@ -32,20 +32,21 @@ body {
 
 header {
   text-align: center;
-  max-width: 680px;
+  max-width: 760px;
 }
 
 header h1 {
-  font-size: 1.2rem;
-  font-weight: 500;
+  font-size: 1.5rem;
+  font-weight: 600;
   letter-spacing: 0.01em;
   color: #e6edf3;
-  margin-bottom: 0.55rem;
+  margin-bottom: 0.6rem;
+  line-height: 1.35;
 }
 
-.header-body {
-  font-size: 0.82rem;
-  color: #8b949e;
+.header-sub {
+  font-size: 0.9rem;
+  color: #9ca8bc;
   line-height: 1.7;
 }
 
@@ -62,40 +63,36 @@ header h1 {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 10px;
-  padding: 1.15rem 1.2rem 1rem;
+  padding: 1.3rem 1.4rem 1.1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
-  max-width: 510px;
-}
-
-/* Third panel spans full row */
-.panel.wide {
-  flex-basis: 100%;
-  max-width: 1060px;
+  gap: 0.85rem;
+  max-width: 515px;
 }
 
 .panel-header {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 0.75rem;
   flex-wrap: wrap;
 }
 
 .panel-title {
-  font-size: 0.92rem;
-  font-weight: 600;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
 .panel-formula {
   font-family: 'Courier New', monospace;
-  font-size: 0.76rem;
-  color: var(--dim);
+  font-size: 0.88rem;
+  color: #b0bac8;
+  font-weight: 500;
 }
 
 .panel-tag {
-  font-size: 0.66rem;
-  padding: 0.14rem 0.5rem;
+  font-size: 0.7rem;
+  padding: 0.15rem 0.55rem;
   border-radius: 20px;
   font-weight: 500;
   margin-left: auto;
@@ -112,24 +109,22 @@ a.panel-tag:hover { opacity: 0.75; }
 
 .mm .panel-title { color: var(--mm); }
 .ns .panel-title { color: var(--ns); }
-.mm .panel-tag { background: rgba(224,108,117,0.1); color: var(--mm); border: 1px solid rgba(224,108,117,0.22); }
-.ns .panel-tag { background: rgba(78,201,176,0.1);  color: var(--ns); border: 1px solid rgba(78,201,176,0.22); }
-.wide .panel-tag { background: rgba(255,255,255,0.05); color: var(--dim); border: 1px solid var(--border); }
+.mm .panel-tag { background: rgba(224,108,117,0.12); color: var(--mm); border: 1px solid rgba(224,108,117,0.25); }
+.ns .panel-tag { background: rgba(78,201,176,0.12);  color: var(--ns); border: 1px solid rgba(78,201,176,0.25); }
 
 .panel-desc {
-  font-size: 0.78rem;
-  color: #8b949e;
-  line-height: 1.6;
-  padding-left: 0.65rem;
-  border-left: 2px solid var(--border);
+  font-size: 0.88rem;
+  color: #aab3c2;
+  line-height: 1.7;
+  padding-left: 0.75rem;
+  border-left: 2.5px solid var(--border);
 }
-.mm .panel-desc   { border-left-color: rgba(224,108,117,0.3); }
-.ns .panel-desc   { border-left-color: rgba(78,201,176,0.3); }
-.wide .panel-desc { border-left-color: rgba(255,255,255,0.1); }
+.mm .panel-desc { border-left-color: rgba(224,108,117,0.4); }
+.ns .panel-desc { border-left-color: rgba(78,201,176,0.4); }
 
 canvas { display: block; border-radius: 5px; max-width: 100%; }
 
-.grad-section { display: flex; flex-direction: column; gap: 0.3rem; }
+.grad-section { display: flex; flex-direction: column; gap: 0.35rem; }
 
 .grad-header {
   display: flex;
@@ -138,16 +133,16 @@ canvas { display: block; border-radius: 5px; max-width: 100%; }
 }
 
 .grad-label {
-  font-size: 0.64rem;
-  color: var(--dimmer);
+  font-size: 0.7rem;
+  color: #6b7a96;
   text-transform: uppercase;
   letter-spacing: 0.07em;
 }
 
 .grad-pct {
   font-family: 'Courier New', monospace;
-  font-size: 0.7rem;
-  color: var(--dim);
+  font-size: 0.75rem;
+  color: #9ca8bc;
 }
 
 .grad-track {
@@ -170,7 +165,7 @@ canvas { display: block; border-radius: 5px; max-width: 100%; }
 
 .readout {
   font-family: 'Courier New', monospace;
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   color: var(--dim);
   display: flex;
   gap: 1.5rem;
@@ -179,32 +174,31 @@ canvas { display: block; border-radius: 5px; max-width: 100%; }
 .readout-item { display: flex; flex-direction: column; gap: 0.1rem; }
 
 .readout-label {
-  font-size: 0.59rem;
+  font-size: 0.63rem;
   color: var(--dimmer);
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
 
-.readout-val { color: var(--text); }
+.readout-val { color: #c9d1d9; }
 
-/* Legend for gradient comparison panel */
-.gc-legend {
-  display: flex;
-  gap: 1.5rem;
-  font-size: 0.75rem;
+/* Takeaway strip below panels */
+.takeaway {
+  background: rgba(78,201,176,0.06);
+  border: 1px solid rgba(78,201,176,0.18);
+  border-radius: 8px;
+  padding: 0.9rem 1.2rem;
+  max-width: 760px;
+  width: 100%;
+  font-size: 0.88rem;
+  color: #aab3c2;
+  line-height: 1.7;
 }
-.gc-legend-item { display: flex; align-items: center; gap: 0.4rem; }
-.gc-legend-item::before {
-  content: '';
-  display: inline-block;
-  width: 20px;
-  height: 2px;
-  border-radius: 1px;
+
+.takeaway strong {
+  color: var(--ns);
+  font-weight: 600;
 }
-.gc-legend-item.mm { color: var(--mm); }
-.gc-legend-item.mm::before { background: var(--mm); }
-.gc-legend-item.ns { color: var(--ns); }
-.gc-legend-item.ns::before { background: var(--ns); }
 
 /* Controls */
 .controls {
@@ -225,10 +219,10 @@ canvas { display: block; border-radius: 5px; max-width: 100%; }
 
 .slider-label {
   font-family: 'Courier New', monospace;
-  font-size: 0.78rem;
-  color: var(--dim);
+  font-size: 0.82rem;
+  color: #9ca8bc;
   white-space: nowrap;
-  min-width: 140px;
+  min-width: 145px;
 }
 
 input[type=range] {
@@ -261,11 +255,11 @@ input[type=range]::-webkit-slider-thumb:hover {
 button {
   background: none;
   border: 1px solid var(--border);
-  color: var(--dim);
-  padding: 0.35rem 1.1rem;
+  color: #9ca8bc;
+  padding: 0.4rem 1.1rem;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   letter-spacing: 0.02em;
   transition: border-color 0.15s, color 0.15s;
   white-space: nowrap;
@@ -274,8 +268,8 @@ button {
 button:hover { border-color: #525d75; color: var(--text); }
 
 .hint {
-  font-size: 0.7rem;
-  color: var(--dimmer);
+  font-size: 0.75rem;
+  color: #525d75;
   letter-spacing: 0.02em;
 }
 </style>
@@ -283,11 +277,8 @@ button:hover { border-color: #525d75; color: var(--text); }
 <body>
 
 <header>
-  <h1>GAN Generator Loss — Gradient Behavior</h1>
-  <p class="header-body">
-    The generator learns by receiving gradient feedback. But the gradient only exists if the loss curve has a slope.<br>
-    Drag the slider to the <em>left</em> to see what happens at the worst moment — when the discriminator is most confident the sample is fake.
-  </p>
+  <h1>There are two ways to frame the GAN Generator loss,<br>and the non-saturating loss results in better training.</h1>
+  <p class="header-sub">Drag the slider to inspect gradient magnitude at any point.<br>Drag left to see the critical early-training zone where the two losses diverge most.</p>
 </header>
 
 <div class="panels">
@@ -300,14 +291,14 @@ button:hover { border-color: #525d75; color: var(--text); }
       <span class="panel-tag">original GAN</span>
     </div>
     <p class="panel-desc">
-      The curve is nearly flat when D(G(z)) is near 0 — the discriminator easily spots the fake.
-      A flat curve means a near-zero gradient, so the generator gets almost no learning signal
-      exactly when it needs one most.
+      When the discriminator is confident the image is fake (left side of the chart),
+      the curve is nearly flat. A flat curve means the gradient is close to zero,
+      so the generator receives almost no learning signal and training stalls.
     </p>
     <canvas id="cvMM" width="490" height="290"></canvas>
     <div class="grad-section">
       <div class="grad-header">
-        <span class="grad-label">gradient magnitude &nbsp;|∂L/∂x|</span>
+        <span class="grad-label">Gradient magnitude &nbsp;|∂L/∂x|</span>
         <span class="grad-pct" id="mmPct">—</span>
       </div>
       <div class="grad-track"><div class="grad-fill" id="barMM"></div></div>
@@ -336,14 +327,14 @@ button:hover { border-color: #525d75; color: var(--text); }
       <a class="panel-tag" href="https://arxiv.org/pdf/1406.2661" target="_blank" rel="noopener">Goodfellow et al. 2014 ↗</a>
     </div>
     <p class="panel-desc">
-      A simple sign flip. The curve is now steepest where D(G(z)) is near 0 —
-      the generator gets its strongest gradient signal exactly when the discriminator
-      is most confident. Training no longer stalls.
+      By flipping the sign, the curve is steepest on the left, which is exactly where
+      the generator needs help most. The gradient is large when the discriminator is most
+      confident, giving the generator a strong push to improve.
     </p>
     <canvas id="cvNS" width="490" height="290"></canvas>
     <div class="grad-section">
       <div class="grad-header">
-        <span class="grad-label">gradient magnitude &nbsp;|∂L/∂x|</span>
+        <span class="grad-label">Gradient magnitude &nbsp;|∂L/∂x|</span>
         <span class="grad-pct" id="nsPct">—</span>
       </div>
       <div class="grad-track"><div class="grad-fill" id="barNS"></div></div>
@@ -364,26 +355,17 @@ button:hover { border-color: #525d75; color: var(--text); }
     </div>
   </div>
 
-  <!-- Gradient comparison — full-width row -->
-  <div class="panel wide">
-    <div class="panel-header">
-      <span class="panel-title" style="color:#e6edf3">Gradient Magnitude Comparison</span>
-      <span class="panel-formula">|∂L/∂x| for both losses on the same axis</span>
-      <span class="panel-tag">the key picture</span>
-    </div>
-    <p class="panel-desc">
-      Both losses produce equal gradient at D(G(z)) = 0.5 (crossover).
-      In the shaded zone — where the discriminator is most confident the sample is fake —
-      non-saturating has far more gradient, giving the generator a real signal to improve.
-      Move the dot left to see the divergence grow.
-    </p>
-    <canvas id="cvGC" width="980" height="195"></canvas>
-    <div class="gc-legend">
-      <span class="gc-legend-item mm">Minimax |∂L/∂x| = 1/(1−x)</span>
-      <span class="gc-legend-item ns">Non-saturating |∂L/∂x| = 1/x</span>
-    </div>
-  </div>
+</div>
 
+<!-- Speed of training takeaway -->
+<div class="takeaway">
+  <strong>Why this matters for training speed:</strong> In the early stages of GAN training, the
+  discriminator is usually far ahead of the generator — it easily classifies generated samples as
+  fake, keeping D(G(z)) near 0. With minimax loss, the gradient vanishes in exactly this region,
+  so the generator makes little to no progress per step. The non-saturating loss flips this:
+  the same "easy fake" region produces the largest gradient, so the generator learns quickly
+  even when the discriminator is dominant. This single change dramatically stabilizes and
+  accelerates the opening phase of training.
 </div>
 
 <div class="controls">
@@ -399,47 +381,36 @@ button:hover { border-color: #525d75; color: var(--text); }
 // ── Canvas setup ──────────────────────────────────────────────────────────────
 const cvMM = document.getElementById('cvMM');
 const cvNS = document.getElementById('cvNS');
-const cvGC = document.getElementById('cvGC');
 const ctxMM = cvMM.getContext('2d');
 const ctxNS = cvNS.getContext('2d');
-const ctxGC = cvGC.getContext('2d');
 
-// ── Layout — main panels ──────────────────────────────────────────────────────
+// ── Layout ───────────────────────────────────────────────────────────────────
 const W = 490, H = 290;
 const M = { top: 28, right: 18, bottom: 38, left: 50 };
 const PW = W - M.left - M.right;
 const PH = H - M.top  - M.bottom;
 
-// ── Layout — gradient comparison panel ───────────────────────────────────────
-const W3 = 980, H3 = 195;
-const M3 = { top: 22, right: 20, bottom: 38, left: 56 };
-const PW3 = W3 - M3.left - M3.right;
-const PH3 = H3 - M3.top  - M3.bottom;
-const GC_YMAX = 12, GC_YMIN = 0;
-
 // ── Coordinate transforms ─────────────────────────────────────────────────────
 const MM_YMIN = -5,    MM_YMAX = 0.35;
 const NS_YMIN = -0.35, NS_YMAX = 5;
 
-function cx(x)    { return M.left  + x * PW; }
-function cx3(x)   { return M3.left + x * PW3; }
-function cyMM(y)  { return M.top  + (MM_YMAX - y) / (MM_YMAX - MM_YMIN) * PH; }
-function cyNS(y)  { return M.top  + (NS_YMAX - y) / (NS_YMAX - NS_YMIN) * PH; }
-function cyGC(y)  { return M3.top + (GC_YMAX - Math.min(y, GC_YMAX + 1)) / (GC_YMAX - GC_YMIN) * PH3; }
+function cx(x)   { return M.left + x * PW; }
+function cyMM(y) { return M.top + (MM_YMAX - y) / (MM_YMAX - MM_YMIN) * PH; }
+function cyNS(y) { return M.top + (NS_YMAX - y) / (NS_YMAX - NS_YMIN) * PH; }
 
 // ── Math ──────────────────────────────────────────────────────────────────────
 const lMM = x => Math.log(1 - x);
 const gMM = x => -1 / (1 - x);
 const lNS = x => -Math.log(x);
 const gNS = x => -1 / x;
-const MAX_GRAD = 100; // |∂L/∂x| at x=0.01 for non-sat
+const MAX_GRAD = 100;
 
 // ── State — starts paused at x=0.5 ───────────────────────────────────────────
 let animating = false;
 let manualX   = 0.5;
 let t         = (0.5 - 0.02) / 0.96;
 let lastTs    = null;
-const DURATION = 5000; // slightly slower to let the aha moment linger
+const DURATION = 5000;
 
 // ── DOM refs ──────────────────────────────────────────────────────────────────
 const sliderEl    = document.getElementById('slider');
@@ -471,7 +442,7 @@ toggleBtn.addEventListener('click', () => {
     animating = false;
     toggleBtn.textContent = 'Animate';
   } else {
-    t         = 0;       // always restart from x=0.02 so viewer sees the aha moment first
+    t         = 0;
     manualX   = null;
     lastTs    = null;
     animating = true;
@@ -506,19 +477,17 @@ function drawPanel(ctx, toY, lossFn, gradFn, color, yMin, yMax, isMinmax) {
   }
 
   // Shaded zone x < 0.15
-  const shadeW = cx(0.15) - cx(0);
   ctx.fillStyle = 'rgba(255,196,80,0.055)';
-  ctx.fillRect(cx(0), M.top, shadeW, PH);
+  ctx.fillRect(cx(0), M.top, cx(0.15) - cx(0), PH);
 
   ctx.save();
   ctx.setLineDash([3, 5]);
-  ctx.strokeStyle = 'rgba(255,196,80,0.3)';
-  ctx.lineWidth = 1;
+  ctx.strokeStyle = 'rgba(255,196,80,0.3)'; ctx.lineWidth = 1;
   ctx.beginPath(); ctx.moveTo(cx(0.15), M.top); ctx.lineTo(cx(0.15), M.top + PH); ctx.stroke();
   ctx.setLineDash([]);
   ctx.restore();
 
-  // Annotation in shaded zone — large, opaque background
+  // Annotation in shaded zone
   {
     const ax = cx(0.012);
     const ay = M.top + PH - 14;
@@ -527,9 +496,9 @@ function drawPanel(ctx, toY, lossFn, gradFn, color, yMin, yMax, isMinmax) {
     ctx.save();
     ctx.font = 'bold 11px -apple-system, sans-serif';
     const tw = Math.max(ctx.measureText(line1).width, ctx.measureText(line2).width);
-    ctx.fillStyle = 'rgba(13,17,23,0.88)';
+    ctx.fillStyle = 'rgba(13,17,23,0.9)';
     ctx.fillRect(ax - 3, ay - 29, tw + 8, 36);
-    ctx.fillStyle = 'rgba(255,200,80,0.9)';
+    ctx.fillStyle = 'rgba(255,200,80,0.95)';
     ctx.textAlign = 'left';
     ctx.font = '10.5px -apple-system, sans-serif';
     ctx.fillText(line1, ax, ay - 14);
@@ -540,15 +509,13 @@ function drawPanel(ctx, toY, lossFn, gradFn, color, yMin, yMax, isMinmax) {
   }
 
   // Axes
-  ctx.strokeStyle = 'rgba(255,255,255,0.16)';
-  ctx.lineWidth = 1.5;
+  ctx.strokeStyle = 'rgba(255,255,255,0.16)'; ctx.lineWidth = 1.5;
   ctx.beginPath();
   ctx.moveTo(M.left, M.top); ctx.lineTo(M.left, M.top + PH); ctx.lineTo(M.left + PW, M.top + PH);
   ctx.stroke();
 
   // Tick labels
-  ctx.fillStyle = '#6b7a96';
-  ctx.font = '10px "Courier New", monospace';
+  ctx.fillStyle = '#6b7a96'; ctx.font = '10px "Courier New", monospace';
   ctx.textAlign = 'center';
   for (let gx = 0; gx <= 1.01; gx += 0.2) {
     const px = cx(gx);
@@ -566,8 +533,7 @@ function drawPanel(ctx, toY, lossFn, gradFn, color, yMin, yMax, isMinmax) {
     ctx.beginPath(); ctx.moveTo(M.left, py); ctx.lineTo(M.left - 4, py); ctx.stroke();
   }
 
-  ctx.fillStyle = '#6b7a96';
-  ctx.font = '11px -apple-system, sans-serif';
+  ctx.fillStyle = '#6b7a96'; ctx.font = '11px -apple-system, sans-serif';
   ctx.textAlign = 'center';
   ctx.fillText('D(G(z))', M.left + PW / 2, H - 2);
   ctx.save();
@@ -609,7 +575,6 @@ function drawPanel(ctx, toY, lossFn, gradFn, color, yMin, yMax, isMinmax) {
   ctx.lineTo(cx(tx2), toY(lv + gv * (tx2 - x)));
   ctx.stroke();
   ctx.setLineDash([]);
-  // Drop line
   ctx.strokeStyle = 'rgba(255,255,255,0.07)'; ctx.lineWidth = 1;
   ctx.setLineDash([2, 4]);
   ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px, M.top + PH); ctx.stroke();
@@ -626,154 +591,7 @@ function drawPanel(ctx, toY, lossFn, gradFn, color, yMin, yMax, isMinmax) {
   ctx.restore();
 }
 
-// ── Draw gradient comparison panel ───────────────────────────────────────────
-function drawGradComp() {
-  const ctx = ctxGC;
-  ctx.clearRect(0, 0, W3, H3);
-  ctx.fillStyle = '#161b27';
-  ctx.fillRect(0, 0, W3, H3);
-
-  const clip3 = new Path2D();
-  clip3.rect(M3.left, M3.top, PW3, PH3);
-
-  // Grid
-  ctx.lineWidth = 1;
-  for (let gx = 0.2; gx < 1; gx += 0.2) {
-    ctx.strokeStyle = 'rgba(255,255,255,0.04)';
-    ctx.beginPath(); ctx.moveTo(cx3(gx), M3.top); ctx.lineTo(cx3(gx), M3.top + PH3); ctx.stroke();
-  }
-  for (let gy = 0; gy <= GC_YMAX; gy += 2) {
-    const py = cyGC(gy);
-    if (py < M3.top || py > M3.top + PH3) continue;
-    ctx.strokeStyle = gy === 0 ? 'rgba(255,255,255,0.09)' : 'rgba(255,255,255,0.04)';
-    ctx.beginPath(); ctx.moveTo(M3.left, py); ctx.lineTo(M3.left + PW3, py); ctx.stroke();
-  }
-
-  // Shaded zone x < 0.15
-  ctx.fillStyle = 'rgba(255,196,80,0.055)';
-  ctx.fillRect(cx3(0), M3.top, cx3(0.15) - cx3(0), PH3);
-  ctx.save();
-  ctx.setLineDash([3, 5]);
-  ctx.strokeStyle = 'rgba(255,196,80,0.3)'; ctx.lineWidth = 1;
-  ctx.beginPath(); ctx.moveTo(cx3(0.15), M3.top); ctx.lineTo(cx3(0.15), M3.top + PH3); ctx.stroke();
-  ctx.setLineDash([]);
-  ctx.restore();
-
-  // "values clipped ↑" note top-left
-  ctx.fillStyle = 'rgba(255,255,255,0.2)';
-  ctx.font = '9px -apple-system, sans-serif';
-  ctx.textAlign = 'left';
-  ctx.fillText('↑ values clipped above 12', M3.left + 2, M3.top + 10);
-
-  // Axes
-  ctx.strokeStyle = 'rgba(255,255,255,0.16)'; ctx.lineWidth = 1.5;
-  ctx.beginPath();
-  ctx.moveTo(M3.left, M3.top); ctx.lineTo(M3.left, M3.top + PH3); ctx.lineTo(M3.left + PW3, M3.top + PH3);
-  ctx.stroke();
-
-  // X ticks
-  ctx.fillStyle = '#6b7a96';
-  ctx.font = '10px "Courier New", monospace';
-  ctx.textAlign = 'center';
-  for (let gx = 0; gx <= 1.01; gx += 0.2) {
-    const px = cx3(gx);
-    ctx.fillText(gx.toFixed(1), px, M3.top + PH3 + 14);
-    ctx.strokeStyle = 'rgba(255,255,255,0.1)'; ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.moveTo(px, M3.top + PH3); ctx.lineTo(px, M3.top + PH3 + 4); ctx.stroke();
-  }
-  // Y ticks
-  ctx.textAlign = 'right';
-  for (let gy = 0; gy <= GC_YMAX; gy += 2) {
-    const py = cyGC(gy);
-    if (py < M3.top - 1 || py > M3.top + PH3 + 1) continue;
-    ctx.fillStyle = '#6b7a96';
-    ctx.fillText(gy, M3.left - 7, py + 3.5);
-    ctx.strokeStyle = 'rgba(255,255,255,0.1)'; ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.moveTo(M3.left, py); ctx.lineTo(M3.left - 4, py); ctx.stroke();
-  }
-
-  ctx.fillStyle = '#6b7a96';
-  ctx.font = '11px -apple-system, sans-serif';
-  ctx.textAlign = 'center';
-  ctx.fillText('D(G(z))', M3.left + PW3 / 2, H3 - 2);
-  ctx.save();
-  ctx.translate(13, M3.top + PH3 / 2);
-  ctx.rotate(-Math.PI / 2);
-  ctx.fillText('|∂L/∂x|', 0, 0);
-  ctx.restore();
-
-  // Minimax gradient curve: 1/(1-x)  (increases left→right)
-  ctx.save();
-  ctx.clip(clip3);
-  ctx.strokeStyle = '#e06c75'; ctx.lineWidth = 2;
-  ctx.shadowColor = '#e06c75'; ctx.shadowBlur = 5;
-  ctx.beginPath();
-  for (let i = 0; i <= 600; i++) {
-    const xi = 0.01 + 0.98 * i / 600;
-    const px = cx3(xi), py = cyGC(1 / (1 - xi));
-    i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
-  }
-  ctx.stroke();
-  ctx.shadowBlur = 0;
-  ctx.restore();
-
-  // Non-sat gradient curve: 1/x  (decreases left→right)
-  ctx.save();
-  ctx.clip(clip3);
-  ctx.strokeStyle = '#4ec9b0'; ctx.lineWidth = 2;
-  ctx.shadowColor = '#4ec9b0'; ctx.shadowBlur = 5;
-  ctx.beginPath();
-  for (let i = 0; i <= 600; i++) {
-    const xi = 0.01 + 0.98 * i / 600;
-    const px = cx3(xi), py = cyGC(1 / xi);
-    i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
-  }
-  ctx.stroke();
-  ctx.shadowBlur = 0;
-  ctx.restore();
-
-  // Crossover annotation at (0.5, 2)
-  {
-    const cpx = cx3(0.5), cpy = cyGC(2);
-    ctx.save();
-    ctx.fillStyle = 'rgba(255,255,255,0.55)';
-    ctx.beginPath(); ctx.arc(cpx, cpy, 3.5, 0, Math.PI * 2); ctx.fill();
-    ctx.fillStyle = 'rgba(255,255,255,0.45)';
-    ctx.font = '10px -apple-system, sans-serif';
-    ctx.textAlign = 'left';
-    ctx.fillText('equal at x = 0.5', cpx + 7, cpy + 4);
-    ctx.restore();
-  }
-
-  // Current x vertical line
-  const x = getX();
-  ctx.save();
-  ctx.clip(clip3);
-  ctx.strokeStyle = 'rgba(255,255,255,0.2)'; ctx.lineWidth = 1;
-  ctx.setLineDash([3, 4]);
-  ctx.beginPath(); ctx.moveTo(cx3(x), M3.top); ctx.lineTo(cx3(x), M3.top + PH3); ctx.stroke();
-  ctx.setLineDash([]);
-
-  const mmGrad = Math.abs(gMM(x));
-  const nsGrad = Math.abs(gNS(x));
-
-  // Minimax dot
-  ctx.shadowColor = '#e06c75'; ctx.shadowBlur = 10;
-  ctx.fillStyle = '#ffffff';
-  ctx.beginPath(); ctx.arc(cx3(x), cyGC(mmGrad), 4.5, 0, Math.PI * 2); ctx.fill();
-  ctx.strokeStyle = '#e06c75'; ctx.lineWidth = 1.8; ctx.stroke();
-  ctx.shadowBlur = 0;
-
-  // Non-sat dot
-  ctx.shadowColor = '#4ec9b0'; ctx.shadowBlur = 10;
-  ctx.fillStyle = '#ffffff';
-  ctx.beginPath(); ctx.arc(cx3(x), cyGC(nsGrad), 4.5, 0, Math.PI * 2); ctx.fill();
-  ctx.strokeStyle = '#4ec9b0'; ctx.lineWidth = 1.8; ctx.stroke();
-  ctx.shadowBlur = 0;
-  ctx.restore();
-}
-
-// ── Update DOM readouts + bars ────────────────────────────────────────────────
+// ── Update DOM ────────────────────────────────────────────────────────────────
 function update() {
   const x = getX();
   const agMM = Math.abs(gMM(x));
@@ -803,12 +621,9 @@ function frame(ts) {
     if (lastTs !== null) t = (t + (ts - lastTs) / DURATION) % 1;
     lastTs = ts;
   }
-
   drawPanel(ctxMM, cyMM, lMM, gMM, '#e06c75', MM_YMIN, MM_YMAX, true);
   drawPanel(ctxNS, cyNS, lNS, gNS, '#4ec9b0', NS_YMIN, NS_YMAX, false);
-  drawGradComp();
   update();
-
   requestAnimationFrame(frame);
 }
 
