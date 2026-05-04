@@ -45,42 +45,10 @@ body {
   letter-spacing: -0.01em;
 }
 
-/* ── Tabs ── */
-.tab-bar {
-  display: flex;
-  gap: 0;
-  border-bottom: 1px solid var(--border);
-  width: 100%;
-  max-width: 1350px;
-  margin-bottom: 2.5rem;
-}
+/* ── Main content ── */
+.main-content { width: 100%; max-width: 1350px; }
 
-.tab-btn {
-  background: none;
-  border: none;
-  border-bottom: 2px solid transparent;
-  color: var(--dim);
-  font-size: 0.95rem;
-  font-weight: 500;
-  padding: 0.65rem 1.5rem;
-  cursor: pointer;
-  letter-spacing: 0.01em;
-  transition: color 0.15s, border-color 0.15s;
-  margin-bottom: -1px;
-}
-
-.tab-btn:hover { color: var(--text); }
-
-.tab-btn.active {
-  color: #e6edf3;
-  border-bottom-color: #e6edf3;
-}
-
-/* ── Tab panes ── */
-.tab-pane { width: 100%; max-width: 1350px; }
-.tab-pane.hidden { display: none; }
-
-/* ── VIZ TAB ── */
+/* ──
 .panels {
   display: flex;
   gap: 2rem;
@@ -114,9 +82,9 @@ body {
 
 .panel-formula {
   font-family: 'Courier New', monospace;
-  font-size: 0.95rem;
-  color: #b0bac8;
-  font-weight: 500;
+  font-size: 1.1rem;
+  color: #d0dae8;
+  font-weight: 700;
 }
 
 .panel-tag {
@@ -161,22 +129,24 @@ canvas { display: block; border-radius: 6px; max-width: 100%; }
 }
 
 .grad-label {
-  font-size: 0.75rem;
-  color: #6b7a96;
+  font-size: 0.85rem;
+  color: #8b99b2;
   text-transform: uppercase;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.06em;
+  font-weight: 500;
 }
 
 .grad-pct {
   font-family: 'Courier New', monospace;
-  font-size: 0.8rem;
-  color: #9ca8bc;
+  font-size: 0.95rem;
+  color: #c9d1d9;
+  font-weight: 600;
 }
 
 .grad-track {
   background: #1a1f2e;
-  border-radius: 3px;
-  height: 10px;
+  border-radius: 4px;
+  height: 16px;
   overflow: hidden;
   border: 1px solid var(--border);
 }
@@ -193,22 +163,23 @@ canvas { display: block; border-radius: 6px; max-width: 100%; }
 
 .readout {
   font-family: 'Courier New', monospace;
-  font-size: 0.82rem;
+  font-size: 1rem;
   color: var(--dim);
   display: flex;
-  gap: 2rem;
+  gap: 2.5rem;
 }
 
-.readout-item { display: flex; flex-direction: column; gap: 0.12rem; }
+.readout-item { display: flex; flex-direction: column; gap: 0.18rem; }
 
 .readout-label {
-  font-size: 0.66rem;
-  color: var(--dimmer);
+  font-size: 0.72rem;
+  color: #6b7a96;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.07em;
+  font-weight: 500;
 }
 
-.readout-val { color: #c9d1d9; }
+.readout-val { color: #e0e6ee; font-size: 1.05rem; font-weight: 600; }
 
 /* Controls */
 .controls {
@@ -284,123 +255,6 @@ input[type=range]::-webkit-slider-thumb:hover {
   letter-spacing: 0.02em;
 }
 
-/* ── WHY TAB ── */
-.why-pane {
-  max-width: 820px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.why-lead {
-  font-size: 1.1rem;
-  color: #aab3c2;
-  line-height: 1.8;
-  border-left: 3px solid rgba(78,201,176,0.5);
-  padding-left: 1.1rem;
-}
-
-.why-section {
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-}
-
-.why-section h2 {
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: #e6edf3;
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-}
-
-.why-section h2 .num {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: var(--border);
-  color: #9ca8bc;
-  font-size: 0.75rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.why-section p {
-  font-size: 0.95rem;
-  color: #aab3c2;
-  line-height: 1.8;
-}
-
-.callout {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.1rem 1.3rem;
-}
-
-.callout.mm-callout { border-left: 3px solid var(--mm); }
-.callout.ns-callout { border-left: 3px solid var(--ns); }
-
-.callout-title {
-  font-size: 0.8rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 0.45rem;
-}
-
-.mm-callout .callout-title { color: var(--mm); }
-.ns-callout .callout-title { color: var(--ns); }
-
-.callout p {
-  font-size: 0.92rem;
-  color: #aab3c2;
-  line-height: 1.75;
-}
-
-.callout code {
-  font-family: 'Courier New', monospace;
-  font-size: 0.88rem;
-  color: #c9d1d9;
-  background: rgba(255,255,255,0.06);
-  padding: 0.1rem 0.35rem;
-  border-radius: 3px;
-}
-
-.side-by-side {
-  display: flex;
-  gap: 1.2rem;
-  flex-wrap: wrap;
-}
-
-.side-by-side .callout { flex: 1 1 300px; }
-
-.why-summary {
-  background: rgba(78,201,176,0.06);
-  border: 1px solid rgba(78,201,176,0.2);
-  border-radius: 10px;
-  padding: 1.2rem 1.4rem;
-}
-
-.why-summary h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--ns);
-  margin-bottom: 0.75rem;
-}
-
-.why-summary p {
-  font-size: 0.95rem;
-  color: #aab3c2;
-  line-height: 1.8;
-}
-
-.why-summary strong { color: #e6edf3; }
 </style>
 </head>
 <body>
@@ -409,14 +263,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   <h1>There are two ways to frame the GAN Generator loss,<br>and the non-saturating loss results in better training.</h1>
 </div>
 
-<!-- Tab bar -->
-<div class="tab-bar">
-  <button class="tab-btn active" data-tab="viz">Loss Curves</button>
-  <button class="tab-btn" data-tab="why">Why It Matters for Training Speed</button>
-</div>
-
-<!-- ── Tab 1: Visualization ── -->
-<div class="tab-pane" id="pane-viz">
+<div class="main-content">
   <div class="panels">
 
     <div class="panel mm">
@@ -501,109 +348,7 @@ input[type=range]::-webkit-slider-thumb:hover {
   </div>
 </div>
 
-<!-- ── Tab 2: Why it matters ── -->
-<div class="tab-pane hidden" id="pane-why">
-  <div class="why-pane">
-
-    <p class="why-lead">
-      The choice of loss function doesn't just change the math — it determines whether
-      the generator can learn at all during the most critical phase of training.
-      Here's why.
-    </p>
-
-    <div class="why-section">
-      <h2><span class="num">1</span>The discriminator always wins first</h2>
-      <p>
-        In the early stages of GAN training, the discriminator has a structural advantage.
-        It sees both real data and generated noise, and quickly learns to tell them apart.
-        The generator, starting from random weights, produces obvious garbage.
-        During this phase, <strong style="color:#c9d1d9">D(G(z)) ≈ 0 for almost every generated sample</strong> —
-        the discriminator is effectively saying "I'm 99% sure this is fake" every single time.
-      </p>
-      <p>
-        This is the zone on the left side of the chart. It's where training either accelerates
-        or dies, depending entirely on which loss you use.
-      </p>
-    </div>
-
-    <div class="why-section">
-      <h2><span class="num">2</span>What each loss does with that information</h2>
-      <div class="side-by-side">
-        <div class="callout mm-callout">
-          <div class="callout-title">Minimax — the original</div>
-          <p>
-            When D(G(z)) ≈ 0.05, the minimax loss is
-            <code>log(1 − 0.05) = −0.05</code> — nearly zero, nearly flat.
-            The gradient is <code>−1/(1 − 0.05) ≈ −1.05</code>.
-            That sounds like something, but relative to the gradient later in training
-            (where x → 1 and the gradient → −∞), it's negligible.
-            The generator takes a tiny, nearly useless step.
-          </p>
-        </div>
-        <div class="callout ns-callout">
-          <div class="callout-title">Non-saturating — the fix</div>
-          <p>
-            At D(G(z)) ≈ 0.05, the non-saturating loss is
-            <code>−log(0.05) ≈ 3.0</code> — large and steep.
-            The gradient is <code>−1/0.05 = −20</code>.
-            The generator receives a massive signal: "you are very wrong, here's exactly
-            how wrong." It takes a large, meaningful step toward fooling the discriminator.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="why-section">
-      <h2><span class="num">3</span>The gradient bar tells the story directly</h2>
-      <p>
-        Switch back to the Loss Curves tab and drag the slider all the way to the left.
-        Watch both gradient bars simultaneously. Non-saturating fills to nearly 100%.
-        Minimax barely registers. Both are looking at the same situation —
-        a discriminator that's confident the sample is fake — but they produce
-        completely opposite gradient magnitudes.
-      </p>
-      <p>
-        Now drag right toward x = 0.5. The bars converge. By x = 0.8, minimax actually
-        has the larger gradient. But that region is irrelevant in early training —
-        the generator never reaches it until it's already learned to fool the discriminator.
-      </p>
-    </div>
-
-    <div class="why-section">
-      <h2><span class="num">4</span>The practical result</h2>
-      <div class="why-summary">
-        <h3>Non-saturating loss trains faster because it eliminates wasted steps</h3>
-        <p>
-          With minimax loss, <strong>the first N gradient steps of training are nearly useless</strong> —
-          the generator barely updates while the discriminator is dominant.
-          Training appears to do nothing, then suddenly the generator catches up.
-          In practice this leads to instability, mode collapse, and long wall-clock times.
-        </p>
-        <p style="margin-top:0.75rem">
-          The non-saturating reformulation ensures that <strong>every step counts</strong>,
-          even at the start. The generator makes meaningful progress on step 1.
-          This stabilizes the adversarial dynamic, reduces the discriminator's lead,
-          and compresses the opening phase of training significantly.
-          It's the same model, same architecture, same learning rate —
-          just a sign flip in the loss.
-        </p>
-      </div>
-    </div>
-
-  </div>
-</div>
-
 <script>
-// ── Tab switching ─────────────────────────────────────────────────────────────
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tab-pane').forEach(p => p.classList.add('hidden'));
-    btn.classList.add('active');
-    document.getElementById('pane-' + btn.dataset.tab).classList.remove('hidden');
-  });
-});
-
 // ── Canvas setup ──────────────────────────────────────────────────────────────
 const cvMM = document.getElementById('cvMM');
 const cvNS = document.getElementById('cvNS');
